@@ -1,1 +1,36 @@
-// TODO
+.posts {
+  margin: 5rem auto 0;
+
+  h1 {
+    color: var(--heading);
+  }
+
+  h2 {
+     padding-top: 0.5rem;
+     color: var(--body);
+     font-size: 1rem;
+     font-weight: normal;
+  }
+
+  .postInfo {
+    color: var(--info);
+    padding-top: 1.5rem;
+
+    time {
+      margin-right: 2rem;
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+      vertical-align: bottom
+    }
+
+    time, span {
+      padding-left: 0.5rem;
+      top: 0.5rem;
+    }
+  }
+
+
+}
