@@ -50,9 +50,9 @@ export default function Post({ post }: PostProps): JSX.Element {
         <title>Home | spacetraveling</title>
       </Head>
       <Header />
-      <main>
-        <img src={post.data.banner} alt="banner" />
-        <div>
+      <main className={styles.container}>
+        <img src={post.data.banner.url} alt="banner" />
+        <div className={styles.post}>
           <h1>{post.data.title}</h1>
           <div className={styles.postInfo}>
             <FiCalendar color="#D7D7D7" />
@@ -67,7 +67,7 @@ export default function Post({ post }: PostProps): JSX.Element {
             <span>4 min</span>
           </div>
           {post.data.content.map(item => (
-            <div key={item.heading}>
+            <div className={styles.postContent} key={item.heading}>
               <h2>{item.heading}</h2>
               {item.body.map(body => (
                 <p key={body.text}>{body.text}</p>

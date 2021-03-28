@@ -1,1 +1,52 @@
-// TODO
+.container {
+  margin: 0 auto;
+  padding-top: 2.5rem;
+
+  img {
+    width: 100%;
+  }
+}
+
+.post {
+  max-width: 720px;
+  margin: 5rem auto 0;
+
+   h1 {
+    color: var(--heading);
+  }
+
+  .postInfo {
+    color: var(--info);
+    padding-top: 1.5rem;
+
+     time, span {
+      margin-right: 2rem;
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+      vertical-align: bottom
+    }
+
+    time, span {
+      padding-left: 0.5rem;
+      top: 0.5rem;
+    }
+  }
+
+  .postContent {
+
+    h2 {
+     padding-top: 2.5rem;
+     color: var(--heading);
+    }
+
+    p {
+       padding-top: 2.5rem;
+       text-align: justify;
+       padding-bottom: 2.5rem;
+    }
+  }
+
+}
