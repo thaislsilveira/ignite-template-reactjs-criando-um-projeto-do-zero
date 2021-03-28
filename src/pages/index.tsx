@@ -92,8 +92,9 @@ export const getStaticProps: GetStaticProps = async () => {
   const postsResponse = await prismic.query(
     [Prismic.predicates.at('document.type', 'repeatable')],
     {
-      fetch: ['publication.title', 'publication.content'],
-      pageSize: 1,
+      fetch: ['post.title', 'post.content'],
+      orderings: '[document.first_publication_date]',
+      pageSize: 3,
     }
   );
 
