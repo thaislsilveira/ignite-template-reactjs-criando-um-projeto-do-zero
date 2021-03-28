@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -15,6 +16,7 @@ import { getPrismicClient } from '../../services/prismic';
 
 import commonStyles from '../../styles/common.module.scss';
 import styles from './post.module.scss';
+import { Comments } from '../../components/Coments';
 
 interface Post {
   first_publication_date: string | null;
@@ -38,6 +40,16 @@ interface PostProps {
 }
 
 export default function Post({ post }: PostProps): JSX.Element {
+  const totalWords = post.data?.content.reduce((total, contentItem) => {
+    total += contentItem.heading.split(' ').length;
+
+    const words = contentItem.body.map(item => item.text.split(' ').length);
+    words.map(word => (total += word));
+    return total;
+  }, 0);
+
+  const readTime = Math.ceil(totalWords / 200);
+
   const router = useRouter();
 
   if (router.isFallback) {
@@ -64,25 +76,30 @@ export default function Post({ post }: PostProps): JSX.Element {
             <FiUser color="#D7D7D7" />
             <span>{post.data.author}</span>
             <FiClock color="#D7D7D7" />
-            <span>4 min</span>
+            <span>{`${readTime} min`}</span>
           </div>
           {post.data.content.map(item => (
             <div className={styles.postContent} key={item.heading}>
               <h2>{item.heading}</h2>
-              {item.body.map(body => (
-                <p key={body.text}>{body.text}</p>
-              ))}
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: RichText.asHtml(item.body),
+                }}
+              />
             </div>
           ))}
         </div>
       </main>
+      <Comments />
     </>
   );
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const prismic = getPrismicClient();
-  const posts = await prismic.query();
+  const posts = await prismic.query([
+    Prismic.Predicates.at('document.type', 'posts'),
+  ]);
 
   const paths = posts.results.map(post => ({
     params: { slug: post.uid },

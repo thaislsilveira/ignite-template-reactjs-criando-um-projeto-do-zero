@@ -33,6 +33,8 @@
   "rules": {
     "camelcase": "off",
     "import/no-duplicates": "off",
+    "no-param-reassign": "off",
+    "no-return-assign": "off",
     "react/jsx-props-no-spreading": "off",
     "prettier/prettier": "error",
     "react/react-in-jsx-scope": "off",
